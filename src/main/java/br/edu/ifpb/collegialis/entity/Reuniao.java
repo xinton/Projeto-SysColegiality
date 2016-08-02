@@ -91,6 +91,10 @@ public class Reuniao {
 	public List<Processo> getProcessos() {
 		return processos;
 	}
+	
+	public int getCountProcessos() {
+		return processos.size();
+	}
 
 	public void setProcessos(List<Processo> processos) {
 		this.processos = processos;

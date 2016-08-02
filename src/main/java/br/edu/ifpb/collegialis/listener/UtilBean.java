@@ -5,8 +5,12 @@ import java.util.List;
 import br.edu.ifpb.collegialis.dao.ColegiadoDAO;
 import br.edu.ifpb.collegialis.dao.CursoDAO;
 import br.edu.ifpb.collegialis.dao.PersistenceUtil;
+import br.edu.ifpb.collegialis.dao.ProcessoDAO;
+import br.edu.ifpb.collegialis.dao.ReuniaoDAO;
 import br.edu.ifpb.collegialis.entity.Colegiado;
 import br.edu.ifpb.collegialis.entity.Curso;
+import br.edu.ifpb.collegialis.entity.Processo;
+import br.edu.ifpb.collegialis.entity.Reuniao;
 
 public class UtilBean {
 
@@ -20,6 +24,18 @@ public class UtilBean {
 		ColegiadoDAO dao = new ColegiadoDAO(PersistenceUtil.getCurrentEntityManager());
 		List<Colegiado> colegiados = dao.findAll();
 		return colegiados;
+	}
+	
+	public List<Reuniao> getReunioes() {
+		ReuniaoDAO dao = new ReuniaoDAO(PersistenceUtil.getCurrentEntityManager());
+		List<Reuniao> reunioes = dao.findAll();
+		return reunioes;
+	}
+	
+	public List<Processo> getProcessos() {
+		ProcessoDAO dao = new ProcessoDAO(PersistenceUtil.getCurrentEntityManager());
+		List<Processo> processos = dao.findAll();
+		return processos;
 	}
 
 }

@@ -65,7 +65,7 @@ public class FacadeColegiado {
 		}
 		
 		// Data inicio é obrigatória
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		if (dataini == null || dataini.length == 0 || dataini[0].isEmpty()) {
 			this.mensagensErro.add("Data início é campo obrigatório!");
 		} else {

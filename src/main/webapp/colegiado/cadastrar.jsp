@@ -14,7 +14,7 @@
 	<nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="/index.jsp">Home</a>
+				<a class="navbar-brand" href="../index.jsp">Home</a>
 			</div>
 		</div>
 	</nav>
