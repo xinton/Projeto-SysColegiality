@@ -82,7 +82,7 @@
 				<div class="panel-body">
 
 					<form action="${pageContext.request.contextPath}/controller.do" method="POST" class="form-horizontal">
-						<input type="hidden" name="op" value="novcol">
+						<input type="hidden" name="op" value="novreun">
 						<div class="row">
 							<div class="col-sm-2" class="form-group">
 								<!-- 	O que é esse "07/2016" -->

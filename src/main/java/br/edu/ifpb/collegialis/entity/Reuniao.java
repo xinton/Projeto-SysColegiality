@@ -99,4 +99,10 @@ public class Reuniao {
 	public void setProcessos(List<Processo> processos) {
 		this.processos = processos;
 	}
+	
+	public void adicionarProcesso(Processo processo)
+	{
+		//processo.setReuniao(this);
+		this.processos.add(processo);
+	}
 }
