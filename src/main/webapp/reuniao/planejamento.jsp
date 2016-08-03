@@ -50,32 +50,53 @@
 			</div>
 			
 			<div style="margin-bottom:30px"></div>
-			
-<!-- 			Tabela da reunioes -->
-			<table class="table table-bordered table-hover">
-				<thead>
-					<tr class="info">
-						<th>Reuniao</th>
-						<th>Data</th>
-						<th>Processos</th>
-						<th>Status</th>
-						<th>Operacoes</th>
-						<th>Excluir</th>
-					</tr>
-				</thead>
-				<tbody>
-				<c:forEach var="reuniao" items="${utilBean.reunioes}">
-					<tr>
-					<td>${reuniao.id}</td>
-					<td><fmt:formatDate value="${reuniao.data}" pattern="dd/MM/yyyy"/></td>
-					<td>${reuniao.countProcessos}</td>
-					<td>${reuniao.status}</td>
-					<td><input type="submit" class="btn btn-primary" value="Operaca"></td>
-					<td><input type="submit" class="btn btn-primary" value="Excluir"></td>
-					</tr>
-				</c:forEach>
-				</tbody>
-			</table>
+
+
+			<div class="panel panel-primary">
+				<!-- Default panel contents -->
+				<div class="panel-heading">Reuniões</div>
+
+
+				<!-- 			Tabela da reunioes -->
+				<table class="table table-bordered table-hover">
+					<thead>
+						<tr class="info">
+							<th>Reuniao</th>
+							<th>Data</th>
+							<th>Processos</th>
+							<th>Status</th>
+							<th>Operacoes</th>
+							<th>Excluir</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach var="reuniao" items="${utilBean.reunioes}">
+							<tr>
+								<td>${reuniao.id} 
+								<a href="acompanhamento.jsp?reuniao=${reuniao.id}"> <span class="label label-success">  Ir  </span> </a> 
+								</td>
+								
+<%-- 								<a href=" --%>
+<%-- 									<c:url value='/cadastraUsuario.jsp'> --%>
+<%-- 										<c:param name="id" value="123"> --%>
+<%-- 									</c:url> --%>
+<!-- 									">click!</a> -->
+								
+								<td><fmt:formatDate value="${reuniao.data}"
+										pattern="dd/MM/yyyy" /></td>
+								<td>${reuniao.countProcessos}</td>
+								<td>${reuniao.status}</td>
+								<td><input type="submit" class="btn btn-primary"
+									value="PDF"></td>
+								<td><input type="submit" class="btn btn-primary"
+									value="x"></td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+				</table>
+			</div>
+
 
 			<div class="panel panel-primary">
 				<div class="panel-heading">Nova Reunião</div>

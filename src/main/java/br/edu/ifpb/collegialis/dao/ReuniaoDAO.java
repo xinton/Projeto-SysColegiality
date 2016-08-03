@@ -19,6 +19,12 @@ public class ReuniaoDAO extends GenericDAO<Reuniao, Integer> {
 		super(em);
 	}
 	
+	public Reuniao getReuniao(Integer id) {
+		ReuniaoDAO dao = new ReuniaoDAO(PersistenceUtil.getCurrentEntityManager());
+		Reuniao reuniao = dao.find(id);
+		return reuniao;
+	}
+	
 	@SuppressWarnings("unchecked")
 	public List<Reuniao> findAll() throws DAOException {
 		try {
