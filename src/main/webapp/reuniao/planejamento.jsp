@@ -127,7 +127,8 @@
 
 						<div class="row">
 							<div class="col-sm-6" class="form-group">
-								<label for="processo" class="control-label">Processos:</label> <select
+								<label for="processo" class="control-label">Processos:</label> 
+								<select
 									class="form-control" id="processo" name="processo">
 									<c:forEach var="processo" items="${utilBean.processos}">
 										<option value="${processo.id}">${processo.numero},
