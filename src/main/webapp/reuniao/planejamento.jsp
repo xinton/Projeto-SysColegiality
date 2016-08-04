@@ -103,7 +103,7 @@
 				<div class="panel-body">
 
 					<form action="${pageContext.request.contextPath}/controller.do" method="POST" class="form-horizontal">
-						<input type="hidden" name="op" value="novcol">
+						<!-- <input type="hidden" name="op" value="novcol"> -->
 						<div class="row">
 							<div class="col-sm-2" class="form-group">
 								<!-- 	O que é esse "07/2016" -->
@@ -137,7 +137,7 @@
 							</div>
 
 							<div class="col-sm-2" class="form-group">
-								<br /> <input type="submit" class="btn btn-primary" value="+">
+								<br /> <input type="submit" class="btn btn-primary" name="op" value="+">
 							</div>
 						</div>
 						
@@ -155,7 +155,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach var="processo" items="${utilBean.processos}">
+								<c:forEach var="processo" items="${sessionScope.processos}">
 									<tr>
 										<td>${processo.numero}</td>
 										<td>${processo.requisitante.nome}</td>
@@ -169,7 +169,7 @@
 
 						<div class="row">
 							<div class="col-sm-2" class="form-group">
-								<br /> <input type="submit" class="btn btn-primary" value="Salvar">
+								<br /> <input type="submit" class="btn btn-primary" name="op" value="Salvar">
 							</div>
 						</div>
 					</form>
