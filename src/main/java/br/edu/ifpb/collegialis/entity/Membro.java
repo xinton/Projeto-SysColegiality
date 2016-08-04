@@ -48,6 +48,14 @@ public class Membro {
 		this.id = id;
 	}
 
+	public TipoMembro getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(TipoMembro tipo) {
+		this.tipo = tipo;
+	}
+
 	public Colegiado getColegiado() {
 		return colegiado;
 	}
