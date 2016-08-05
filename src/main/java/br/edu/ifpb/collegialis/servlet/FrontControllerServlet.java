@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.edu.ifpb.collegialis.entity.Colegiado;
+import br.edu.ifpb.collegialis.entity.Processo;
 import br.edu.ifpb.collegialis.facade.FacadeColegiado;
+import br.edu.ifpb.collegialis.facade.FacadeProcesso;
 import br.edu.ifpb.collegialis.facade.Resultado;
 
 /**
@@ -34,6 +36,7 @@ public class FrontControllerServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// Para as operacoes com colegiado
 		FacadeColegiado facadeColegiado = new FacadeColegiado();
+		FacadeProcesso facadeProcesso = new FacadeProcesso();
 
 		String proxPagina = null;
 		String paginaErro = null;
@@ -59,6 +62,19 @@ public class FrontControllerServlet extends HttpServlet {
 				proxPagina = paginaSucesso;
 			} else {
 				request.setAttribute("colegiado", (Colegiado) resultado.getEntitade());
+				request.setAttribute("msgsErro", resultado.getMensagensErro());
+				proxPagina = paginaErro;
+			}
+			break;
+		// Cria novo processo
+		case "novproc":
+			paginaSucesso = "processo/listar.jsp";
+			paginaErro = "processo/cadastrar.jsp";
+			resultado = facadeProcesso.cadastrar(request.getParameterMap());
+			if (!resultado.isErro()) {
+				proxPagina = paginaSucesso;
+			} else {
+				request.setAttribute("processo", (Processo) resultado.getEntitade());
 				request.setAttribute("msgsErro", resultado.getMensagensErro());
 				proxPagina = paginaErro;
 			}

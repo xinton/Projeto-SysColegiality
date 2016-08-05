@@ -27,13 +27,16 @@
 				<div class="panel-heading">Filtros</div>
 				<div class="row">
 					<div class="col-md-2">
+						<input type="checkbox" > Não atribuídos a um relator </input>
 						apenas os não atribuídos a um relator
 					</div>
 					<div class="col-md-2">
 						<label for="membro">Relator:</label> 
 						<select class="form-control" id="membro" name="membro">
 							<c:forEach var="membro" items="${utilBean.membros}">
-<!-- 								Só professores do colegiado podem ser um relator -->
+								
+								<!--Só professores do colegiado podem ser um relator -->
+								<!--Ver questão do colegial ativo do curso -->
 								<c:if test="${membro.tipo eq 'PROFESSOR'}">
 									<option value="${membro.id}">${membro.professor.nome}
 									</option>
@@ -70,29 +73,31 @@
 						</tr>
 					</thead>
 					<tbody>
+<%-- 						<c:set var="processos" value="${utilBean.processos}" /> --%>
+<%-- 						<c:if test="${not empty param.relator}"> --%>
+<%-- 							<c:forEach var="processoIteretor" items="${utilBean.processos}"> --%>
+<%-- 								<c:if test="${processoIteretor.numero eq param.processo}"> --%>
+<%-- 									<c:set var="processos" value="${utilBean.processos}" /> --%>
+<%-- 								</c:if> --%>
+<%-- 							</c:forEach> --%>
+<%-- 						</c:if> --%>
 						<c:forEach var="processo" items="${utilBean.processos}">
 							<tr>
 								<td>${processo.numero}</td>
-								<td>
-									<fmt:formatDate value="${processo.dataRecepcao}"
-										pattern="dd/MM/yyyy" />
-								</td>
-								<td>
-									<fmt:formatDate value="${processo.dataDistribuicao}"
-										pattern="dd/MM/yyyy" />
-								</td>
-								<td>
-									<fmt:formatDate value="${processo.dataParecer}"
-										pattern="dd/MM/yyyy" />
-								</td>
-<%-- 								<td>${processo.parecer}</td> --%>
+								<td><fmt:formatDate value="${processo.dataRecepcao}"
+										pattern="dd/MM/yyyy" /></td>
+								<td><fmt:formatDate value="${processo.dataDistribuicao}"
+										pattern="dd/MM/yyyy" /></td>
+								<td><fmt:formatDate value="${processo.dataParecer}"
+										pattern="dd/MM/yyyy" /></td>
+								<%-- 								<td>${processo.parecer}</td> --%>
 								<td>parecer</td>
 								<td>${processo.decisao}</td>
 								<td>${processo.assunto.descricao}</td>
-<%-- 								<td>${processo.votos}</td> --%>
+								<%-- 								<td>${processo.votos}</td> --%>
 								<td>votos</td>
 								<td>${processo.relator.professor.nome}</td>
-								<td>${processo.requisitante.nome}</td>								
+								<td>${processo.requisitante.nome}</td>
 								<td>${processo.reuniao.id}</td>
 							</tr>
 						</c:forEach>
