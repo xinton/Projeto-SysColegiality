@@ -10,13 +10,7 @@
 <title>Planejamento de Reunioes</title>
 </head>
 <body>
-	<nav class="navbar navbar-default navbar-fixed-top">
-		<div class="container">
-			<div class="navbar-header">
-				<a class="navbar-brand" href="../index.jsp">Home</a>
-			</div>
-		</div>
-	</nav>
+	<c:import url="../templates/navbar.jsp"/>
 	
 	<div class="container">
 		<div class="main-page" style="margin-top: 70px">
