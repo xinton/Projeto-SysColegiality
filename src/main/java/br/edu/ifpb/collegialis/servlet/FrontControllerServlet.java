@@ -1,6 +1,7 @@
 package br.edu.ifpb.collegialis.servlet;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -78,6 +79,18 @@ public class FrontControllerServlet extends HttpServlet {
 				request.setAttribute("msgsErro", resultado.getMensagensErro());
 				proxPagina = paginaErro;
 			}
+			break;
+			// Cria novo processo
+		case "filproc":
+			paginaSucesso = "processo/listar.jsp";
+			paginaErro = "processo/listar.jsp";
+			
+			List<Processo> processos = facadeProcesso.filtrarPorRelator(request.getParameter("membro") );
+			request.setAttribute("processos", processos);
+			request.setAttribute("membro", request.getParameter("membro"));
+			
+			RequestDispatcher dispatcher = request.getRequestDispatcher(paginaSucesso);
+			dispatcher.forward(request, response);
 			break;
 		// Atualiza um colegiado existente
 		case "atucol":

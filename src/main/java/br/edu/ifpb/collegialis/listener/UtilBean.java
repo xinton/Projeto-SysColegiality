@@ -25,6 +25,12 @@ public class UtilBean {
 //		Reuniao reuniao = dao.find(id);
 //		return reuniao;
 //	}
+	
+//	public List<Processo> getProcessosByRelator(String relator){
+//		ProcessoDAO dao = new ProcessoDAO(PersistenceUtil.getCurrentEntityManager());
+//		List<Processo> processos = dao.findByRelator(Integer.valueOf(relator));
+//		return processos;
+//	}
 
 	public List<Curso> getCursos() {
 		CursoDAO dao = new CursoDAO(PersistenceUtil.getCurrentEntityManager());

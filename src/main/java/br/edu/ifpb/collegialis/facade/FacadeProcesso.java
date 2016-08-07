@@ -25,6 +25,12 @@ public class FacadeProcesso {
 	
 	private List<String> mensagensErro;
 	
+	public List<Processo> filtrarPorRelator(String idrelator){
+		ProcessoDAO dao = new ProcessoDAO(PersistenceUtil.getCurrentEntityManager());
+		List<Processo> processos = dao.findByRelator(Integer.valueOf(idrelator));
+		return processos;
+	}
+	
 	public Resultado cadastrar(Map<String, String[]> parametros) {
 		
 		Resultado resultado = new Resultado();

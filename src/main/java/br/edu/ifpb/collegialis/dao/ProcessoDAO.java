@@ -29,6 +29,20 @@ public class ProcessoDAO extends GenericDAO<Processo, Integer> {
 	}
 	
 	@SuppressWarnings("unchecked")
+	public List<Processo> findByRelator(Integer idrelator) {
+		//Processos sem realtor
+		if (idrelator == 99) {
+			Query q = this.getEntityManager().createQuery("from Processo where id_relator is null");
+			return q.getResultList();
+		} else {
+			Query q = this.getEntityManager().createQuery("from Processo where id_relator = :idrelator");
+			q.setParameter("idrelator", idrelator);
+			return q.getResultList();
+		}
+		
+	}
+	
+	@SuppressWarnings("unchecked")
 	public List<Processo> findAll() throws DAOException {
 		try {
 		Query q = this.getEntityManager().createQuery("from Processo p");

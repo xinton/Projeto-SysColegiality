@@ -11,13 +11,8 @@
 <title> Processos </title>
 </head>
 <body>
-		<nav class="navbar navbar-default navbar-fixed-top">
-		<div class="container">
-			<div class="navbar-header">
-				<a class="navbar-brand" href="../index.jsp">Home</a>
-			</div>
-		</div>
-	</nav>
+
+	<c:import url="../templates/navbar.jsp"/>
 	
 	<div class="container">
 		<div class="main-page" style="margin-top: 70px">
@@ -25,35 +20,41 @@
 			<div class="panel panel-primary">
 				<!-- Default panel contents -->
 				<div class="panel-heading">Filtros</div>
-				<div class="row">
-					<div class="col-md-2">
-						<input type="checkbox" > Não atribuídos a um relator </input>
-						apenas os não atribuídos a um relator
-					</div>
-					<div class="col-md-2">
-						<label for="membro">Relator:</label> 
-						<select class="form-control" id="membro" name="membro">
-							<c:forEach var="membro" items="${utilBean.membros}">
-								
-								<!--Só professores do colegiado podem ser um relator -->
-								<!--Ver questão do colegial ativo do curso -->
-								<c:if test="${membro.tipo eq 'PROFESSOR'}">
-									<option value="${membro.id}">${membro.professor.nome}
-									</option>
-								</c:if>								
-							</c:forEach>
-						</select>
-					</div>
-					<div class="col-md-2">
-						os que estão num determinado status
-					</div>
+				<div class="panel-body">
+					<form action="${pageContext.request.contextPath}/controller.do"
+						method="POST" class="form-horizontal">
+						<input type="hidden" name="op" value="filproc">
+						<div class="row">
+							<div class="col-md-2">
+								<label for="membro">Relator:</label> <select
+									class="form-control" id="membro" name="membro">
+									<option value="99">Nenhum Relator</option>
+									<c:forEach var="membro" items="${utilBean.membros}">
+										<!--Só professores do colegiado podem ser um relator -->
+										<!--Ver questão do colegial ativo do curso -->
+										<c:if test="${membro.tipo eq 'PROFESSOR'}">
+											<option value="${membro.id}">${membro.professor.nome}
+											</option>
+										</c:if>
+									</c:forEach>
+								</select>
+							</div>
+							<!-- 						<div class="col-md-2">os que estão num determinado status</div> -->
+						</div>
+						<div class="row" style="margin-top: 10px">
+							<div class="col-sm-2" class="form-group">
+								<br /> <input type="submit" class="btn btn-primary"
+									value="Fltrar">
+							</div>
+						</div>
+					</form>
 				</div>
+
 			</div>
 			
 			<div class="panel panel-primary">
 				<!-- Default panel contents -->
 				<div class="panel-heading"></div>
-
 
 				<!-- 			Tabela de processos -->
 				<table class="table table-bordered table-hover">
@@ -81,7 +82,17 @@
 <%-- 								</c:if> --%>
 <%-- 							</c:forEach> --%>
 <%-- 						</c:if> --%>
-						<c:forEach var="processo" items="${utilBean.processos}">
+
+						<c:choose>
+						    <c:when test="${empty requestScope.processos}">
+						    	<c:set var="processos" value="${utilBean.processos}" />
+						    </c:when>
+						    <c:otherwise>
+						    	<c:set var="processos" value="${requestScope.processos}" />
+						    </c:otherwise>
+						</c:choose>
+
+						<c:forEach var="processo" items="${processos}">
 							<tr>
 								<td>${processo.numero}</td>
 								<td><fmt:formatDate value="${processo.dataRecepcao}"
@@ -107,5 +118,7 @@
 			</div>
 		</div>
 	</div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>
