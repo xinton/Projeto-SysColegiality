@@ -16,6 +16,7 @@ import br.edu.ifpb.collegialis.entity.Colegiado;
 import br.edu.ifpb.collegialis.entity.Processo;
 import br.edu.ifpb.collegialis.facade.FacadeColegiado;
 import br.edu.ifpb.collegialis.facade.FacadeProcesso;
+import br.edu.ifpb.collegialis.facade.FacadeReuniao;
 import br.edu.ifpb.collegialis.facade.Resultado;
 
 /**
@@ -45,7 +46,7 @@ public class FrontControllerServlet extends HttpServlet {
 		String proxPagina = null;
 		String paginaErro = null;
 		String paginaSucesso = null;
-		List <Processo> processos = null;
+		List <Processo> processosToAdd = null;
 		HttpSession session = request.getSession();
 		//List<Processo> processos;
 		this.getServletContext().removeAttribute("msgsErro");
@@ -108,22 +109,21 @@ public class FrontControllerServlet extends HttpServlet {
 			}
 			break;
 		case "+":
-			processos = (ArrayList<Processo>) session.getAttribute("processos"); 
+			processosToAdd = (ArrayList<Processo>) session.getAttribute("processos"); 
 			session.setAttribute("processos", facadeReuniao.adicionarProcesso(
-						request.getParameterMap(), processos
-						));
-				//request.setAttribute("processos",
-					/*request.setAttribute(
+					request.getParameterMap(), processosToAdd
+					));
+			//request.setAttribute("processos",
+			/*request.setAttribute(
 							"processos", facadeReuniao.adicionarProcesso(
 									request.getParameterMap(), processos)
 							);*/
-					//request.setAttribute("processos", arg1);
-					proxPagina = "reuniao/planejamento.jsp";
-					break;
+			//request.setAttribute("processos", arg1);
+			proxPagina = "reuniao/planejamento.jsp";
+			break;
 		case "Salvar":
-			System.out.println("ChegouNoSalvar");
-			processos = (ArrayList<Processo>) session.getAttribute("processos");
-			facadeReuniao.cadastrar(request.getParameterMap(),processos);
+			processosToAdd = (ArrayList<Processo>) session.getAttribute("processos");
+			facadeReuniao.cadastrar(request.getParameterMap(),processosToAdd);
 			proxPagina = "colegiado/listar.jsp";
 			break;
 		default:
