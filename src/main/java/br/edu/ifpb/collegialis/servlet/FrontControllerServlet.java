@@ -116,7 +116,7 @@ public class FrontControllerServlet extends HttpServlet {
 					request.getParameterMap(), processosToAdd
 					));
 			
-			proxPagina = "reuniao/listar.jsp";
+			proxPagina = "reuniao/planejamento.jsp";
 			break;
 		case "Salvar":
 			processosToAdd = (ArrayList<Processo>) session.getAttribute("processos");
