@@ -31,6 +31,12 @@ public class UtilBean {
 //		List<Processo> processos = dao.findByRelator(Integer.valueOf(relator));
 //		return processos;
 //	}
+	
+	public Colegiado getColegiadoAtual(String idcoord) {
+		ColegiadoDAO dao = new ColegiadoDAO(PersistenceUtil.getCurrentEntityManager());
+		Colegiado colegiado = dao.findColegialAtual(idcoord);
+		return colegiado;
+	}
 
 	public List<Curso> getCursos() {
 		CursoDAO dao = new CursoDAO(PersistenceUtil.getCurrentEntityManager());

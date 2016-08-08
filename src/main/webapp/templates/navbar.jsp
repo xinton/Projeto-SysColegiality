@@ -19,6 +19,8 @@
 				aria-expanded="false"> Reunião <span class="caret"></span></a>
 				<ul class="dropdown-menu">
 					<li><a href="${pageContext.request.contextPath}/reuniao/planejamento.jsp">Planejar</a></li>
+					<li><a href="${pageContext.request.contextPath}/reuniao/cadastrar.jsp">Cadastrar</a></li>
+					<li><a href="${pageContext.request.contextPath}/reuniao/listar.jsp">Listar</a></li>
 <!-- 					<li><a href="${pageContext.request.contextPath}/reuniao/acompanhamento.jsp">Acompanhar</a></li> -->
 				</ul>
 			</li>

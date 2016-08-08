@@ -119,7 +119,13 @@
 								<td>${processo.decisao}</td>
 								<td>${processo.assunto.descricao}</td>
 								<%-- 								<td>${processo.votos}</td> --%>
-								<td>votos</td>
+								<td>
+									<div>
+										<button type="button" class="btn btn-primary"
+											data-toggle="modal" data-target="#votosModal">
+											Votos</button>
+									</div> 
+								</td>
 								<td>${processo.relator.professor.nome}</td>
 								<td>${processo.requisitante.nome}</td>
 								<td>${processo.reuniao.id}</td>

@@ -53,8 +53,11 @@ public class FacadeReuniao
 		if (processos == null || processos.size() == 0 || processos.isEmpty()) {
 			this.mensagensErro.add("É necessário ao menos adicionar um processo na reunião!");
 		} else {
-			try {
+			try {				
 				this.reuniao.setProcessos(processos);
+				for(Processo p : processos){
+					p.setReuniao(this.reuniao);
+				}
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 			}

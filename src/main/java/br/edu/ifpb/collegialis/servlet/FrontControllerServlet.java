@@ -113,21 +113,16 @@ public class FrontControllerServlet extends HttpServlet {
 			session.setAttribute("processos", facadeReuniao.adicionarProcesso(
 					request.getParameterMap(), processosToAdd
 					));
-			//request.setAttribute("processos",
-			/*request.setAttribute(
-							"processos", facadeReuniao.adicionarProcesso(
-									request.getParameterMap(), processos)
-							);*/
-			//request.setAttribute("processos", arg1);
-			proxPagina = "reuniao/planejamento.jsp";
+			
+			proxPagina = "reuniao/listar.jsp";
 			break;
 		case "Salvar":
 			processosToAdd = (ArrayList<Processo>) session.getAttribute("processos");
 			facadeReuniao.cadastrar(request.getParameterMap(),processosToAdd);
-			proxPagina = "colegiado/listar.jsp";
+			proxPagina = "reuniao/listar.jsp";
 			break;
 		default:
-			request.setAttribute("erro", "Opera√ß√£o n√£o especificada no servlet!");
+			request.setAttribute("erro", "OperaÁ„o n„o especificada no servlet!");
 			proxPagina = "../erro/erro.jsp";
 		}
 		RequestDispatcher dispatcher = request.getRequestDispatcher(proxPagina);
