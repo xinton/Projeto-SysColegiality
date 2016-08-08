@@ -1,6 +1,7 @@
 package br.edu.ifpb.collegialis.servlet;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,7 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.edu.ifpb.collegialis.entity.Colegiado;
+import br.edu.ifpb.collegialis.entity.Processo;
 import br.edu.ifpb.collegialis.facade.FacadeColegiado;
+import br.edu.ifpb.collegialis.facade.FacadeProcesso;
 import br.edu.ifpb.collegialis.facade.Resultado;
 
 /**
@@ -34,6 +37,7 @@ public class FrontControllerServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// Para as operacoes com colegiado
 		FacadeColegiado facadeColegiado = new FacadeColegiado();
+		FacadeProcesso facadeProcesso = new FacadeProcesso();
 
 		String proxPagina = null;
 		String paginaErro = null;
@@ -62,6 +66,31 @@ public class FrontControllerServlet extends HttpServlet {
 				request.setAttribute("msgsErro", resultado.getMensagensErro());
 				proxPagina = paginaErro;
 			}
+			break;
+		// Cria novo processo
+		case "novproc":
+			paginaSucesso = "processo/listar.jsp";
+			paginaErro = "processo/cadastrar.jsp";
+			resultado = facadeProcesso.cadastrar(request.getParameterMap());
+			if (!resultado.isErro()) {
+				proxPagina = paginaSucesso;
+			} else {
+				request.setAttribute("processo", (Processo) resultado.getEntitade());
+				request.setAttribute("msgsErro", resultado.getMensagensErro());
+				proxPagina = paginaErro;
+			}
+			break;
+			// Cria novo processo
+		case "filproc":
+			paginaSucesso = "processo/listar.jsp";
+			paginaErro = "processo/listar.jsp";
+			
+			List<Processo> processos = facadeProcesso.filtrarPorRelator(request.getParameter("membro") );
+			request.setAttribute("processos", processos);
+			request.setAttribute("membro", request.getParameter("membro"));
+			
+			RequestDispatcher dispatcher = request.getRequestDispatcher(paginaSucesso);
+			dispatcher.forward(request, response);
 			break;
 		// Atualiza um colegiado existente
 		case "atucol":

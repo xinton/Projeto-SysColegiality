@@ -67,7 +67,7 @@
 						<c:forEach var="reuniao" items="${utilBean.reunioes}">
 							<tr>
 								<td>${reuniao.id} 
-								<a href="acompanhamento.jsp?reuniao=${reuniao.id}"> <span class="label label-success">  Ir  </span> </a> 
+								<a href="acompanhamento.jsp?reuniao=${reuniao.id}"> <span class="label label-success">  Abrir  </span> </a> 
 								</td>
 								
 <%-- 								<a href=" --%>
