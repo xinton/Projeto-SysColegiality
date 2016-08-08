@@ -83,10 +83,9 @@
 						<div class="panel-heading"> Processo em apreciação </div>
 						<div class="panel-body">
 							<form action="${pageContext.request.contextPath}/controller.do" method="POST" class="form-horizontal">
-
+								<input type="hidden" name="idProcesso" value="${processo.id}">
 <!-- 								DETALHE AQ -->
-								<input type="hidden" name="op" value="novcol">
-<!-- 								DETALHE AQ -->
+								
 								
 								<div class="row">								
 									<div class="col-sm-4" class="form-group">
@@ -158,15 +157,15 @@
 															${membro.professor.nome}
 														</td>
 														<td>
-															<input type="radio" name="voto${membro.id}" value="comrelator"/>
+															<input type="radio" name="voto-${membro.id}" value="COM_RELATOR"/>
 															Com o relator														
 														</td>
 														<td>
-															<input type="radio" name="voto" value="divergente"/>
+															<input type="radio" name="voto-${membro.id}" value="DIVERGENTE"/>
 															Divergente
 														</td>
 														<td>
-															<input type="radio" name="voto" value="ausente"/>
+															<input type="radio" name="voto-${membro.id}" value="ausente"/>
 														 	Ausente
 														</td>
 													</tr>
@@ -178,7 +177,7 @@
 
 								<div class="row">
 									<div class="col-sm-2" class="form-group">
-										<br /> <input type="submit" class="btn btn-primary"
+										<br /> <input type="submit" class="btn btn-primary" name="op"
 											value="Concluir">
 									</div>
 									<div class="col-sm-2" class="form-group">

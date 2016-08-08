@@ -11,14 +11,15 @@ import javax.servlet.http.HttpServletResponse;
 
 import br.edu.ifpb.collegialis.entity.Colegiado;
 import br.edu.ifpb.collegialis.facade.FacadeColegiado;
+import br.edu.ifpb.collegialis.facade.FacadeVoto;
 import br.edu.ifpb.collegialis.facade.Resultado;
 
 /**
- * Servlet que atende a todas as requisições dos diversos casos de uso da
- * aplicação. Possui um parâmetro obrigatório onde deve ser informada a operação
+ * Servlet que atende a todas as requisiï¿½ï¿½es dos diversos casos de uso da
+ * aplicaï¿½ï¿½o. Possui um parï¿½metro obrigatï¿½rio onde deve ser informada a operaï¿½ï¿½o
  * a ser executada.
  * 
- * Exemplo: para cadastrar um colegiado, a URL é
+ * Exemplo: para cadastrar um colegiado, a URL ï¿½
  * http://container:porta/collegialis/controller.do?op=cadcol
  */
 @WebServlet("/controller.do")
@@ -34,7 +35,7 @@ public class FrontControllerServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// Para as operacoes com colegiado
 		FacadeColegiado facadeColegiado = new FacadeColegiado();
-
+		FacadeVoto facadeVoto = new FacadeVoto();
 		String proxPagina = null;
 		String paginaErro = null;
 		String paginaSucesso = null;
@@ -43,7 +44,7 @@ public class FrontControllerServlet extends HttpServlet {
 		
 		String operacao = request.getParameter("op");
 		if (operacao == null) {
-			this.getServletContext().setAttribute("msgsErro", "Operação (op) não especificada na requisição!");
+			this.getServletContext().setAttribute("msgsErro", "Operaï¿½ï¿½o (op) nï¿½o especificada na requisiï¿½ï¿½o!");
 			response.sendRedirect(request.getHeader("Referer"));
 			return;
 		}
@@ -73,8 +74,11 @@ public class FrontControllerServlet extends HttpServlet {
 				proxPagina = paginaSucesso;
 			}
 			break;
+		case "Concluir":
+			facadeVoto.votarProcesso(request.getParameterMap());
+			proxPagina = "reuniao/acompanhamento,jsp";
 		default:
-			request.setAttribute("erro", "Operação não especificada no servlet!");
+			request.setAttribute("erro", "Operaï¿½ï¿½o nï¿½o especificada no servlet!");
 			proxPagina = "../erro/erro.jsp";
 		}
 		RequestDispatcher dispatcher = request.getRequestDispatcher(proxPagina);
