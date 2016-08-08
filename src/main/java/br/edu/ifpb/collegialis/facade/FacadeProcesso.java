@@ -65,11 +65,18 @@ public class FacadeProcesso {
 		String[] assunto = parametros.get("assunto");
 		String[] decisao = parametros.get("decisao");
 		String[] relator = parametros.get("relator");
-		String[] requisitante = parametros.get("requisitante");
+		String[] requisitante = parametros.get("requisitante");		
+		String[] parecer = parametros.get("parecer");
 		
 		this.processo = new Processo();
 		
 		this.mensagensErro = new ArrayList<String>();
+		
+		// Define parecer
+		if (parecer != null && parecer.length != 0 && !parecer[0].isEmpty()){ 
+			byte[] bytes = parecer[0].getBytes();
+			this.processo.setParecer(bytes);
+		}
 		
 		// Descricao é obrigatorio
 		if (numero == null || numero.length == 0 || numero[0].isEmpty()) {
@@ -87,28 +94,28 @@ public class FacadeProcesso {
 				Date dataRecepcao = sdf.parse(datarecepcao[0]);
 				this.processo.setDataRecepcao(dataRecepcao);
 			} catch (ParseException e) {
-				this.mensagensErro.add("Formato inválido para a data início");
+				this.mensagensErro.add("Formato inválido para a data de recepção");
 			}
 		}
 		
 		// Define Data de Distribuição
-		if (datadistribuicao != null || datadistribuicao.length != 0 || !datadistribuicao[0].isEmpty()){ 
+		if (datadistribuicao != null && datadistribuicao.length != 0 && !datadistribuicao[0].isEmpty()){ 
 			try{
 				Date dataDistribuicao = sdf.parse(datadistribuicao[0]);
 				this.processo.setDataDistribuicao(dataDistribuicao);
 			} catch (ParseException e) {
-				this.mensagensErro.add("Formato inválido para a data início");
+				this.mensagensErro.add("Formato inválido para a data de distribuição");
 			}
 			
 		}
 
 		// Define Data do Parecer
-		if (dataparecer != null || dataparecer.length != 0 || !dataparecer[0].isEmpty()){ 
+		if (dataparecer != null && dataparecer.length != 0 && !dataparecer[0].isEmpty()){ 
 			try{
 				Date dataParecer = sdf.parse(dataparecer[0]);
 				this.processo.setDataParecer(dataParecer);
 			} catch (ParseException e) {
-				this.mensagensErro.add("Formato inválido para a data início");
+				this.mensagensErro.add("Formato inválido para a data do parecer");
 			}
 
 		}

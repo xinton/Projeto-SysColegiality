@@ -8,8 +8,22 @@
 <title>Cadastro Processo</title>
 <link href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/font-awesome-4.6.3/css/font-awesome.min.css" rel="stylesheet">
+<script src="${pageContext.request.contextPath}/tinymce/tinymce.min.js"></script>
+<script type="text/javascript">
+  tinymce.init({
+    selector: '#parecer'
+  });
+ </script>
 </head>
 <body>
+
+	<c:if test="${not empty param.processo}">
+		<c:forEach var="processoIteretor" items="${utilBean.processos}">
+			<c:if test="${processoIteretor.numero eq param.processo}">
+				<c:set var="processo"  value="${processoIteretor}"/>
+			</c:if>
+		</c:forEach>
+	</c:if>
 
 	<c:import url="../templates/navbar.jsp"/>
 
@@ -43,23 +57,35 @@
 									<input id="numero" value="${processo.numero}" name="numero" type="text" class="form-control" placeholder="0000000000000/yyyy" />
 								</div>
 							</div>
+
+							<div class="col-sm-3" class="form-group">
+								<label for="parecer" class="control-label disabled">Redigir parecer:</label>
+								<div>
+									<button type="button" class="btn btn-primary"
+										data-toggle="modal" data-target="#redigirParecerModal">
+										Redigir Parecer</button>
+								</div>
+							</div>
+
 						</div>
 						<div class="row" style="margin-top:10px">
 							<div class="col-sm-2" class="form-group">
 								<label for="datarecepcao" class="control-label">*Data de Recepcao:</label>
 								<div>
-									<input id="datarecepcao" value="${processo.dataRecepcao}" name="datarecepcao" class="form-control" type="date" />
+									<fmt:formatDate var="dtrec" value="${processo.dataRecepcao}" pattern="yyyy-MM-dd" />
+<%-- 									<fmt:formatDate var="dtrec" value="${processo.dataRecepcao}" pattern="dd/MM/yyyy" /> --%>
+									<input id="datarecepcao" value="${dtrec}" name="datarecepcao" class="form-control" type="date" />
 								</div>
 							</div>						
 							<div class="col-sm-2" class="form-group">
 								<label for="datadistribuicao" class="control-label">Data da Distribuicao:</label>
-								<fmt:formatDate var="dif" value="${processo.dataDistribuicao}" pattern="dd/MM/yyyy"/>  
-								<input id="datadistribuicao" value="${dif}" name="datadistribuicao" class="form-control" type="date" placeholder="dd/mm/aaaa" />
+								<fmt:formatDate var="dtdist" value="${processo.dataDistribuicao}" pattern="yyyy-MM-dd"/>  
+								<input id="datadistribuicao" value="${dtdist}" name="datadistribuicao" class="form-control" type="date" placeholder="dd/mm/aaaa" />
 							</div>
 							<div class="col-sm-2" class="form-group">
 								<label for="dataparecer" class="control-label">Data do Parecer:</label> 
-								<fmt:formatDate var="dff" value="${processo.dataParecer}" pattern="dd/MM/yyyy"/>
-								<input id="dataparecer" value="${dff}" name="dataparecer" class="form-control" type="date" placeholder="dd/mm/aaaa" />
+								<fmt:formatDate var="dtpar" value="${processo.dataParecer}" pattern="yyyy-MM-dd"/>
+								<input id="dataparecer" value="${dtpar}" name="dataparecer" class="form-control" type="date" placeholder="dd/mm/aaaa" />
 							</div>
 						</div>
 
@@ -111,14 +137,40 @@
 
 						<div class="row" style="margin-top:10px">
 							<div class="col-sm-2" class="form-group">
-								<br /> <input type="submit" class="btn btn-primary" value="Criar">
+								<br /> <input type="submit" class="btn btn-primary" value="Salvar">
 							</div>
 						</div>
+						
+						<!-- Modal -->
+						<div class="modal fade" id="redigirParecerModal" tabindex="-1"
+							role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+							<div class="modal-dialog modal-lg" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal"
+											aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+										<h4 class="modal-title" id="myModalLabel">Parecer do
+											processo</h4>
+									</div>
+									<div class="modal-body">
+										<textarea class="form-control" id="parecer" name="parecer">${processo.parecer} </textarea>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary"
+											data-dismiss="modal">Fechar</button>
+										<button type="button" class="btn btn-primary">Salvar</button>
+									</div>
+								</div>
+							</div>
+						</div>
+
 					</form>
 				</div>
 			</div>
 		</div>
-	</div>
+	</div>	
 	
 	<c:set var="endofconversation" value="true" scope="request"/>
 

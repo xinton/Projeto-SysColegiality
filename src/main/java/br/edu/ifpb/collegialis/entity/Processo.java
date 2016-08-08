@@ -1,5 +1,7 @@
 package br.edu.ifpb.collegialis.entity;
 
+
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.Set;
 
@@ -111,8 +113,17 @@ public class Processo {
 		this.dataParecer = dataParecer;
 	}
 
-	public byte[] getParecer() {
-		return parecer;
+//	public byte[] getParecer() {
+//		return parecer;
+//	}
+	
+	public String getParecer() {
+//		String parecerString = new String(byte[] this.parecer, Charset charset);
+		if (parecer != null ){ 
+			String parecerString = new String(parecer, StandardCharsets.UTF_8);
+			return parecerString;
+		}
+		return "Sem parecer";
 	}
 
 	public void setParecer(byte[] parecer) {

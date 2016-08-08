@@ -8,6 +8,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/font-awesome-4.6.3/css/font-awesome.min.css" rel="stylesheet">
+<script src="${pageContext.request.contextPath}/tinymce/tinymce.min.js"></script>
+<script type="text/javascript">
+  tinymce.init({
+    selector: '#parecer'
+  });
+ </script>
 <title> Processos </title>
 </head>
 <body>
@@ -61,16 +67,17 @@
 					<thead>
 						<tr class="info">
 							<th>Número</th>
-							<th>dataRecepcao</th>
-							<th>dataDistribuicao</th>
-							<th>dataParecer</th>
-							<th>parecer</th>
-							<th>decisao</th>
-							<th>assunto</th>
-							<th>votos</th>
-							<th>relator</th>
-							<th>requisitante</th>
-							<th>reuniao</th>
+							<th>Data da Recepcao</th>
+							<th>Data de Distribuicao</th>
+							<th>Data do Parecer</th>
+							<th>Parecer</th>
+							<th>Decisão</th>
+							<th>Assunto</th>
+							<th>Votos</th>
+							<th>Relator</th>
+							<th>Requisitante</th>
+							<th>Reunião</th>
+							<th>Editar</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -102,7 +109,13 @@
 								<td><fmt:formatDate value="${processo.dataParecer}"
 										pattern="dd/MM/yyyy" /></td>
 								<%-- 								<td>${processo.parecer}</td> --%>
-								<td>parecer</td>
+								<td> 
+									<div>
+										<button type="button" class="btn btn-primary"
+											data-toggle="modal" data-target="#parecerModal">
+											Parecer</button>
+									</div> 
+								</td>
 								<td>${processo.decisao}</td>
 								<td>${processo.assunto.descricao}</td>
 								<%-- 								<td>${processo.votos}</td> --%>
@@ -110,14 +123,51 @@
 								<td>${processo.relator.professor.nome}</td>
 								<td>${processo.requisitante.nome}</td>
 								<td>${processo.reuniao.id}</td>
+								<td>
+									<center>
+									<a href="${pageContext.request.contextPath}/processo/cadastrar.jsp?processo=${processo.numero}"> <i class="glyphicon glyphicon-pencil"></i> </a>
+									</center> 
+								</td>
 							</tr>
+
+							<!-- Modal -->
+							<!--TODO Variar parecer -->
+							<!-- http://v4-alpha.getbootstrap.com/components/modal/#varying-modal-content-based-on-trigger-button -->
+							<div class="modal fade" id="parecerModal" tabindex="-1"
+								role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+								<div class="modal-dialog modal-lg" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal"
+												aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+											</button>
+											<h4 class="modal-title" id="myModalLabel">Parecer do
+												processo</h4>
+										</div>
+										<div class="modal-body">
+											<textarea class="form-control" id="parecer" name="parecer">${processo.parecer} </textarea>
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-secondary"
+												data-dismiss="modal">Fechar</button>
+											<button type="button" class="btn btn-primary">Salvar</button>
+										</div>
+									</div>
+								</div>
+							</div>
+
+
+
 						</c:forEach>
 					</tbody>
-				</table>
 				</table>
 			</div>
 		</div>
 	</div>
+
+	
+
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js"></script>
 </body>
