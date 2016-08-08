@@ -84,22 +84,21 @@
 							</c:forEach>
 						</div>
 					</div>
-					<input type="submit" class="btn btn-primary" value="Encerrar Reunião">
+					<input type="submit" class="btn btn-primary" value="Encerrar Reuniï¿½o">
 				</div>
 
 				<div class="col-sm-9 " class="form-group">
 					<div class="panel panel-primary">
-						<div class="panel-heading"> Processo em apreciação </div>
+						<div class="panel-heading"> Processo em apreciaï¿½ï¿½o </div>
 						<div class="panel-body">
 							<form action="${pageContext.request.contextPath}/controller.do" method="POST" class="form-horizontal">
-
+								<input type="hidden" name="idProcesso" value="${processo.id}">
 <!-- 								DETALHE AQ -->
-								<input type="hidden" name="op" value="novcol">
-<!-- 								DETALHE AQ -->
+								
 								
 								<div class="row">								
 									<div class="col-sm-4" class="form-group">
-										<label for="numeroProcesso" class="control-label disabled">Nº:</label>
+										<label for="numeroProcesso" class="control-label disabled">Nï¿½:</label>
 										<div>
 											<p id="numeroProcesso" name="numeroProcesso" class="form-control-static">${processo.numero}</p>
 <%-- 											<input type="text" id="numeroProcesso" value="${processo.numero}" --%>
@@ -133,7 +132,7 @@
 										<div class="row">
 
 											<div class="col-sm-8" class="form-group">
-												<label for="decisao">Decisão:</label> <select
+												<label for="decisao">Decisï¿½o:</label> <select
 													class="form-control" id="decisao" name="decisao">
 													<option value="DEFERIDO" label="DEFERIDO">DEFERIDO</option>
 													<option value="INDEFERIDO" label="INDEFERIDO">INDEFERIDO</option>
@@ -141,7 +140,7 @@
 											</div>
 
 											<!-- <div class="col-sm-6" class="form-group"> -->
-<!-- 												<label for="decisao" class="control-label disabled">Decisão:</label> -->
+<!-- 												<label for="decisao" class="control-label disabled">Decisï¿½o:</label> -->
 <!-- 												<div> -->
 <!-- 													<input type="text" id="decisao" -->
 <%-- 														value="${processo.decisao}" name="decisao" --%>
@@ -182,15 +181,15 @@
 															${membro.professor.nome}
 														</td>
 														<td>
-															<input type="radio" name="voto${membro.id}" value="comrelator"/>
+															<input type="radio" name="voto-${membro.id}" value="COM_RELATOR"/>
 															Com o relator														
 														</td>
 														<td>
-															<input type="radio" name="voto${membro.id}" value="divergente"/>
+															<input type="radio" name="voto-${membro.id}" value="DIVERGENTE"/>
 															Divergente
 														</td>
 														<td>
-															<input type="radio" name="voto${membro.id}" value="ausente"/>
+															<input type="radio" name="voto-${membro.id}" value="ausente"/>
 														 	Ausente
 														</td>
 													</tr>
@@ -202,7 +201,7 @@
 
 								<div class="row">
 									<div class="col-sm-2" class="form-group">
-										<br /> <input type="submit" class="btn btn-primary"
+										<br /> <input type="submit" class="btn btn-primary" name="op"
 											value="Concluir">
 									</div>
 									<div class="col-sm-2" class="form-group">

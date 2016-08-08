@@ -17,6 +17,8 @@ import br.edu.ifpb.collegialis.entity.Processo;
 import br.edu.ifpb.collegialis.facade.FacadeColegiado;
 import br.edu.ifpb.collegialis.facade.FacadeProcesso;
 import br.edu.ifpb.collegialis.facade.FacadeReuniao;
+import br.edu.ifpb.collegialis.facade.FacadeVoto;
+
 import br.edu.ifpb.collegialis.facade.Resultado;
 
 /**
@@ -41,7 +43,7 @@ public class FrontControllerServlet extends HttpServlet {
 		// Para as operacoes com colegiado
 		FacadeColegiado facadeColegiado = new FacadeColegiado();
 		FacadeProcesso facadeProcesso = new FacadeProcesso();
-
+		FacadeVoto facadeVoto = new FacadeVoto();
 		FacadeReuniao facadeReuniao = new FacadeReuniao();
 		String proxPagina = null;
 		String paginaErro = null;
@@ -119,10 +121,14 @@ public class FrontControllerServlet extends HttpServlet {
 		case "Salvar":
 			processosToAdd = (ArrayList<Processo>) session.getAttribute("processos");
 			facadeReuniao.cadastrar(request.getParameterMap(),processosToAdd);
-			proxPagina = "reuniao/listar.jsp";
+			proxPagina = "reuniao/planejamento.jsp";
+			break;
+		case "Concluir":
+			facadeVoto.votarProcesso(request.getParameterMap());
+			proxPagina = "reuniao/acompanhamento.jsp";
 			break;
 		default:
-			request.setAttribute("erro", "Operação não especificada no servlet!");
+			request.setAttribute("erro", "Operaï¿½ï¿½o nï¿½o especificada no servlet!");
 			proxPagina = "../erro/erro.jsp";
 		}
 		RequestDispatcher dispatcher = request.getRequestDispatcher(proxPagina);
