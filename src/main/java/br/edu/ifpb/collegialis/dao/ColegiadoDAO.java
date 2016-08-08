@@ -8,6 +8,8 @@ import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 
 import br.edu.ifpb.collegialis.entity.Colegiado;
+import br.edu.ifpb.collegialis.entity.Coordenador;
+import br.edu.ifpb.collegialis.entity.Usuario;
 
 public class ColegiadoDAO extends GenericDAO<Colegiado, Integer> implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -18,6 +20,16 @@ public class ColegiadoDAO extends GenericDAO<Colegiado, Integer> implements Seri
 
 	public ColegiadoDAO(EntityManager em) {
 		super(em);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public Colegiado findColegialAtual(String idcoord) {
+		Query q = this.getEntityManager().createQuery(
+				"SELECT cr.id_colegiado_atual "
+				+ "FROM Curso"
+				+ "WHERE cr.id_coord_atual = :idcoord");
+		q.setParameter("idcoord", idcoord);
+		return (Colegiado) q.getSingleResult();
 	}
 	
 	@SuppressWarnings("unchecked")

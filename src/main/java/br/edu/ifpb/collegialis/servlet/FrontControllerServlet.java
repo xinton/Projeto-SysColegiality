@@ -1,6 +1,8 @@
 package br.edu.ifpb.collegialis.servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,18 +10,23 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import br.edu.ifpb.collegialis.entity.Colegiado;
+import br.edu.ifpb.collegialis.entity.Processo;
 import br.edu.ifpb.collegialis.facade.FacadeColegiado;
+import br.edu.ifpb.collegialis.facade.FacadeProcesso;
+import br.edu.ifpb.collegialis.facade.FacadeReuniao;
 import br.edu.ifpb.collegialis.facade.FacadeVoto;
+
 import br.edu.ifpb.collegialis.facade.Resultado;
 
 /**
- * Servlet que atende a todas as requisi��es dos diversos casos de uso da
- * aplica��o. Possui um par�metro obrigat�rio onde deve ser informada a opera��o
+ * Servlet que atende a todas as requisições dos diversos casos de uso da
+ * aplicação. Possui um parâmetro obrigatório onde deve ser informada a operação
  * a ser executada.
  * 
- * Exemplo: para cadastrar um colegiado, a URL �
+ * Exemplo: para cadastrar um colegiado, a URL é
  * http://container:porta/collegialis/controller.do?op=cadcol
  */
 @WebServlet("/controller.do")
@@ -35,20 +42,24 @@ public class FrontControllerServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// Para as operacoes com colegiado
 		FacadeColegiado facadeColegiado = new FacadeColegiado();
+		FacadeProcesso facadeProcesso = new FacadeProcesso();
 		FacadeVoto facadeVoto = new FacadeVoto();
+		FacadeReuniao facadeReuniao = new FacadeReuniao();
 		String proxPagina = null;
 		String paginaErro = null;
 		String paginaSucesso = null;
-
+		List <Processo> processosToAdd = null;
+		HttpSession session = request.getSession();
+		//List<Processo> processos;
 		this.getServletContext().removeAttribute("msgsErro");
-		
+
 		String operacao = request.getParameter("op");
 		if (operacao == null) {
-			this.getServletContext().setAttribute("msgsErro", "Opera��o (op) n�o especificada na requisi��o!");
+			this.getServletContext().setAttribute("msgsErro", "Operação (op) não especificada na requisição!");
 			response.sendRedirect(request.getHeader("Referer"));
 			return;
 		}
-		
+
 		Resultado resultado = null;
 		switch (operacao) {
 		// Cria novo colegiado
@@ -64,6 +75,31 @@ public class FrontControllerServlet extends HttpServlet {
 				proxPagina = paginaErro;
 			}
 			break;
+		// Cria novo processo
+		case "novproc":
+			paginaSucesso = "processo/listar.jsp";
+			paginaErro = "processo/cadastrar.jsp";
+			resultado = facadeProcesso.cadastrar(request.getParameterMap());
+			if (!resultado.isErro()) {
+				proxPagina = paginaSucesso;
+			} else {
+				request.setAttribute("processo", (Processo) resultado.getEntitade());
+				request.setAttribute("msgsErro", resultado.getMensagensErro());
+				proxPagina = paginaErro;
+			}
+			break;
+			// Cria novo processo
+		case "filproc":
+			paginaSucesso = "processo/listar.jsp";
+			paginaErro = "processo/listar.jsp";
+			
+			List<Processo> processos = facadeProcesso.filtrarPorRelator(request.getParameter("membro") );
+			request.setAttribute("processos", processos);
+			request.setAttribute("membro", request.getParameter("membro"));
+			
+			RequestDispatcher dispatcher = request.getRequestDispatcher(paginaSucesso);
+			dispatcher.forward(request, response);
+			break;
 		// Atualiza um colegiado existente
 		case "atucol":
 			resultado = facadeColegiado.atualizar(request.getParameterMap());
@@ -74,9 +110,23 @@ public class FrontControllerServlet extends HttpServlet {
 				proxPagina = paginaSucesso;
 			}
 			break;
+		case "+":
+			processosToAdd = (ArrayList<Processo>) session.getAttribute("processos"); 
+			session.setAttribute("processos", facadeReuniao.adicionarProcesso(
+					request.getParameterMap(), processosToAdd
+					));
+			
+			proxPagina = "reuniao/listar.jsp";
+			break;
+		case "Salvar":
+			processosToAdd = (ArrayList<Processo>) session.getAttribute("processos");
+			facadeReuniao.cadastrar(request.getParameterMap(),processosToAdd);
+			proxPagina = "reuniao/planejamento.jsp";
+			break;
 		case "Concluir":
 			facadeVoto.votarProcesso(request.getParameterMap());
-			proxPagina = "reuniao/acompanhamento,jsp";
+			proxPagina = "reuniao/acompanhamento.jsp";
+			break;
 		default:
 			request.setAttribute("erro", "Opera��o n�o especificada no servlet!");
 			proxPagina = "../erro/erro.jsp";
@@ -85,5 +135,5 @@ public class FrontControllerServlet extends HttpServlet {
 		dispatcher.forward(request, response);
 
 	}
-
+	
 }

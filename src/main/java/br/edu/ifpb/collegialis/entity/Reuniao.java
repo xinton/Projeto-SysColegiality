@@ -61,7 +61,9 @@ public class Reuniao {
 	}
 
 	public void setData(Date data) {
+		System.out.println("MetodoSet");
 		this.data = data;
+		System.out.println("DepoisDeAtribuir");
 	}
 
 	public StatusReuniao getStatus() {
@@ -98,5 +100,15 @@ public class Reuniao {
 
 	public void setProcessos(List<Processo> processos) {
 		this.processos = processos;
+	}
+	// TEM QUE VER ISSO AQUI VEI, TÁ RETORNANDO NULL QUANDO ADICIONA
+	public void adicionarProcesso(Processo processo)
+	{
+		System.out.println("EntrouNoAdicionar");
+		try{
+		this.processos.add(processo);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 	}
 }
