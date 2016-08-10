@@ -124,8 +124,6 @@ public class FrontControllerServlet extends HttpServlet {
 					));
 			
 			proxPagina = "reuniao/planejamento.jsp";
-			RequestDispatcher dispatcher2 = request.getRequestDispatcher(proxPagina);
-			dispatcher2.forward(request, response);
 			break;
 		case "novreun":
 			processosToAdd = (ArrayList<Processo>) session.getAttribute("processos");
@@ -133,16 +131,10 @@ public class FrontControllerServlet extends HttpServlet {
 			proxPagina = "reuniao/planejamento.jsp";
 			processosToAdd = null;
 			session.setAttribute("processos", processosToAdd);
-			
-			RequestDispatcher dispatcher3 = request.getRequestDispatcher(proxPagina);
-			dispatcher3.forward(request, response);
 			break;
 		case "votarProcesso":
 			facadeVoto.votarProcesso(request.getParameterMap());
 			proxPagina = "reuniao/acompanhamento.jsp";
-			
-			RequestDispatcher dispatcher4 = request.getRequestDispatcher(proxPagina);
-			dispatcher4.forward(request, response);
 			break;
 		case "Excluir":
 			//facadeReuniao.remover
@@ -151,6 +143,8 @@ public class FrontControllerServlet extends HttpServlet {
 			proxPagina = "../erro/erro.jsp";
 		}
 		
+		RequestDispatcher dispatcher = request.getRequestDispatcher(proxPagina);
+		dispatcher.forward(request, response);
 	}
 	
 }
