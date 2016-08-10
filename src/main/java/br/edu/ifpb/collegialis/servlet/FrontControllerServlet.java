@@ -127,6 +127,8 @@ public class FrontControllerServlet extends HttpServlet {
 			facadeVoto.votarProcesso(request.getParameterMap());
 			proxPagina = "reuniao/acompanhamento.jsp";
 			break;
+		case "Excluir":
+			//facadeReuniao.remover
 		default:
 			request.setAttribute("erro", "Opera��o n�o especificada no servlet!");
 			proxPagina = "../erro/erro.jsp";

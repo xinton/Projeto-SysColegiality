@@ -175,7 +175,7 @@
 										<table class="table">
 											<tbody>
 												<c:forEach var="membro" items="${utilBean.membros}">
-													<tr>
+													<tr name="">
 														<td>
 															<!-- Ver os alunos membros tb -->
 															${membro.professor.nome}
