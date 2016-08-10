@@ -60,7 +60,6 @@
 							<th>Processos</th>
 							<th>Status</th>
 							<th>Operacoes</th>
-							<th>Excluir</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -80,10 +79,16 @@
 										pattern="dd/MM/yyyy" /></td>
 								<td>${reuniao.countProcessos}</td>
 								<td>${reuniao.status}</td>
-								<td><input type="submit" class="btn btn-primary"
-									value="PDF"></td>
-								<td><input type="submit" class="btn btn-primary"
-									value="x"></td>
+								<td>
+									<center>
+																		
+									<button type="submit" value="" class="btn btn-default">
+									<i class="glyphicon glyphicon-file text-defalut"></i> PDF</button>
+									
+									<button type="submit" value="" class="btn btn-danger">
+									<i class="glyphicon glyphicon-remove text-defalut"></i> Excluir</button>
+									</center>
+								</td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -132,7 +137,11 @@
 							</div>
 
 							<div class="col-sm-2" class="form-group">
-								<br /> <input type="submit" class="btn btn-primary" name="op" value="+">
+								
+								<br/>
+									<button name="op" type="submit" value="+" class="btn btn-primary">
+									<i class="glyphicon glyphicon-plus text-default"></i> </button>								
+<!-- 								<input type="submit" class="btn btn-primary" name="op" value="+"> -->
 							</div>
 						</div>
 						
@@ -155,8 +164,15 @@
 										<td>${processo.numero}</td>
 										<td>${processo.requisitante.nome}</td>
 										<td>${processo.assunto.descricao}</td>
-										<td>${processo.relator.professor.nome}</td>	
-										<td><input type="submit" class="btn btn-danger" value="Excluir"></td>
+										<td>${processo.relator.professor.nome}</td>
+										<td>
+											<center>
+												<button type="submit" value="" class="btn btn-danger">
+													<i class="glyphicon glyphicon-remove text-defalut"></i>
+													Excluir
+												</button>
+											</center>
+										</td>
 									</tr>
 								</c:forEach>
 							</tbody>

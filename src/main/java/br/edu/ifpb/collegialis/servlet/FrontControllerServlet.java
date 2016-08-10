@@ -124,6 +124,8 @@ public class FrontControllerServlet extends HttpServlet {
 					));
 			
 			proxPagina = "reuniao/planejamento.jsp";
+			RequestDispatcher dispatcher2 = request.getRequestDispatcher(proxPagina);
+			dispatcher2.forward(request, response);
 			break;
 		case "Salvar":
 			processosToAdd = (ArrayList<Processo>) session.getAttribute("processos");
@@ -138,9 +140,7 @@ public class FrontControllerServlet extends HttpServlet {
 			request.setAttribute("erro", "Operacao nao especificada no servlet!");
 			proxPagina = "../erro/erro.jsp";
 		}
-		RequestDispatcher dispatcher = request.getRequestDispatcher(proxPagina);
-		dispatcher.forward(request, response);
-
+		
 	}
 	
 }

@@ -49,8 +49,8 @@
 						</div>
 						<div class="row" style="margin-top: 10px">
 							<div class="col-sm-2" class="form-group">
-								<br /> <input type="submit" class="btn btn-primary"
-									value="Fltrar">
+								<br /> <button type="submit" class="btn btn-primary"
+									value="Fltrar"><i class="glyphicon glyphicon-search text-defalut"></i>Filtar </button>
 							</div>
 						</div>
 					</form>
@@ -111,9 +111,9 @@
 								<%-- 								<td>${processo.parecer}</td> --%>
 								<td> 
 									<div>
-										<button type="button" class="btn btn-primary"
+										<button type="button" class="btn btn-default"
 											data-toggle="modal" data-target="#parecerModal">
-											Parecer</button>
+											<i class="glyphicon glyphicon-file text-defalut"></i>Parecer</button>
 									</div> 
 								</td>
 								<td>${processo.decisao}</td>

@@ -27,14 +27,9 @@
 <!-- 				</div> -->
 <%-- 			</c:if> --%>
 			
-			<div style="margin-bottom:30px"></div>
-			
-			<div style="margin-bottom:30px"></div>
-
 			<div class="panel panel-primary">
 				<div class="panel-heading">Nova Reunião</div>
 				<div class="panel-body">
-
 					<form action="${pageContext.request.contextPath}/controller.do" method="POST" class="form-horizontal">
 						<!-- <input type="hidden" name="op" value="novcol"> -->
 						<div class="row">
@@ -71,7 +66,11 @@
 							</div>
 
 							<div class="col-sm-2" class="form-group">
-								<br /> <input type="submit" class="btn btn-primary" name="op" value="+">
+								
+								<br/>
+									<button name="op" type="submit" value="+" class="btn btn-primary">
+									<i class="glyphicon glyphicon-plus text-default"></i> </button>								
+<!-- 								<input type="submit" class="btn btn-primary" name="op" value="+"> -->
 							</div>
 						</div>
 						
@@ -94,8 +93,15 @@
 										<td>${processo.numero}</td>
 										<td>${processo.requisitante.nome}</td>
 										<td>${processo.assunto.descricao}</td>
-										<td>${processo.relator.professor.nome}</td>	
-										<td><input type="submit" class="btn btn-primary" value="Excluir"></td>
+										<td>${processo.relator.professor.nome}</td>
+										<td>
+											<center>
+												<button type="submit" value="" class="btn btn-danger">
+													<i class="glyphicon glyphicon-remove text-defalut"></i>
+													Excluir
+												</button>
+											</center>
+										</td>
 									</tr>
 								</c:forEach>
 							</tbody>
@@ -109,7 +115,6 @@
 					</form>
 				</div>
 			</div>
-		</div>
 	</div>
 	
 	<c:set var="endofconversation" value="true" scope="request"/>
