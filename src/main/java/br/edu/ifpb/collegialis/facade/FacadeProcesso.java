@@ -34,7 +34,7 @@ public class FacadeProcesso {
 	public Resultado cadastrar(Map<String, String[]> parametros) {
 		
 		Resultado resultado = new Resultado();
-		
+		System.out.println("cadastrar");
 		// Se passar na validacao, o objeto Processo pode ser persistido
 		if (this.validarParametros(parametros)) {
 			ProcessoDAO dao = new ProcessoDAO(PersistenceUtil.getCurrentEntityManager());
@@ -52,8 +52,22 @@ public class FacadeProcesso {
 	}
 
 	public Resultado atualizar(Map<String, String[]> parametros) {
-		// TODO Auto-generated method stub
-		return null;
+		Resultado resultado = new Resultado();
+		System.out.println("atualizar");
+		// Se passar na validacao, o objeto Processo pode ser persistido
+		if (this.validarParametros(parametros)) {
+			ProcessoDAO dao = new ProcessoDAO(PersistenceUtil.getCurrentEntityManager());
+			dao.beginTransaction();
+			dao.update(this.processo);
+			dao.commit();
+			resultado.setErro(false);
+			resultado.setMensagensErro(Collections.singletonList("Processo criado com sucesso"));
+		} else {
+			resultado.setEntitade(this.processo);
+			resultado.setErro(true);
+			resultado.setMensagensErro(this.mensagensErro);
+		}
+		return resultado;
 	}
 	
 	private boolean validarParametros(Map<String, String[]> parametros) {
@@ -78,7 +92,7 @@ public class FacadeProcesso {
 			this.processo.setParecer(bytes);
 		}
 		
-		// Descricao é obrigatorio
+		// numero é obrigatorio
 		if (numero == null || numero.length == 0 || numero[0].isEmpty()) {
 			this.mensagensErro.add("Numero do Processo é campo obrigatório!");
 		} else {

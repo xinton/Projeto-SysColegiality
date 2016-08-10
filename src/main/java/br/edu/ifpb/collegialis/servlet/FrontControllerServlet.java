@@ -55,7 +55,7 @@ public class FrontControllerServlet extends HttpServlet {
 
 		String operacao = request.getParameter("op");
 		if (operacao == null) {
-			this.getServletContext().setAttribute("msgsErro", "Operação (op) não especificada na requisição!");
+			this.getServletContext().setAttribute("msgsErro", "Operacao (op) nao especificada na requisição!");
 			response.sendRedirect(request.getHeader("Referer"));
 			return;
 		}
@@ -79,7 +79,14 @@ public class FrontControllerServlet extends HttpServlet {
 		case "novproc":
 			paginaSucesso = "processo/listar.jsp";
 			paginaErro = "processo/cadastrar.jsp";
-			resultado = facadeProcesso.cadastrar(request.getParameterMap());
+			
+			String edit = request.getParameter("edit");
+			if (!edit.equals("n")){
+				resultado = facadeProcesso.atualizar(request.getParameterMap());
+			} else {
+				resultado = facadeProcesso.cadastrar(request.getParameterMap());
+			}
+			
 			if (!resultado.isErro()) {
 				proxPagina = paginaSucesso;
 			} else {
@@ -117,6 +124,8 @@ public class FrontControllerServlet extends HttpServlet {
 					));
 			
 			proxPagina = "reuniao/planejamento.jsp";
+			RequestDispatcher dispatcher2 = request.getRequestDispatcher(proxPagina);
+			dispatcher2.forward(request, response);
 			break;
 		case "Salvar":
 			processosToAdd = (ArrayList<Processo>) session.getAttribute("processos");
@@ -130,12 +139,10 @@ public class FrontControllerServlet extends HttpServlet {
 		case "Excluir":
 			//facadeReuniao.remover
 		default:
-			request.setAttribute("erro", "Opera��o n�o especificada no servlet!");
+			request.setAttribute("erro", "Operacao nao especificada no servlet!");
 			proxPagina = "../erro/erro.jsp";
 		}
-		RequestDispatcher dispatcher = request.getRequestDispatcher(proxPagina);
-		dispatcher.forward(request, response);
-
+		
 	}
 	
 }

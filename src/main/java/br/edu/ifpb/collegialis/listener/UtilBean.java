@@ -10,6 +10,7 @@ import br.edu.ifpb.collegialis.dao.MembroDAO;
 import br.edu.ifpb.collegialis.dao.PersistenceUtil;
 import br.edu.ifpb.collegialis.dao.ProcessoDAO;
 import br.edu.ifpb.collegialis.dao.ReuniaoDAO;
+import br.edu.ifpb.collegialis.dao.VotoDAO;
 import br.edu.ifpb.collegialis.entity.Aluno;
 import br.edu.ifpb.collegialis.entity.Assunto;
 import br.edu.ifpb.collegialis.entity.Colegiado;
@@ -17,6 +18,7 @@ import br.edu.ifpb.collegialis.entity.Curso;
 import br.edu.ifpb.collegialis.entity.Membro;
 import br.edu.ifpb.collegialis.entity.Processo;
 import br.edu.ifpb.collegialis.entity.Reuniao;
+import br.edu.ifpb.collegialis.entity.Voto;
 
 public class UtilBean {
 	
@@ -78,6 +80,12 @@ public class UtilBean {
 		AlunoDAO dao = new AlunoDAO(PersistenceUtil.getCurrentEntityManager());
 		List<Aluno> alunos = dao.findAll();
 		return alunos;
+	}
+	
+	public List<Voto> getVotos() {
+		VotoDAO dao = new VotoDAO(PersistenceUtil.getCurrentEntityManager());
+		List<Voto> votos = dao.findAll();
+		return votos;
 	}
 
 }

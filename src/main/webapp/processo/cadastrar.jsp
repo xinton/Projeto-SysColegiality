@@ -16,11 +16,12 @@
  </script>
 </head>
 <body>
-
+	<c:set var="edit"  value="n"/>
 	<c:if test="${not empty param.processo}">
 		<c:forEach var="processoIteretor" items="${utilBean.processos}">
 			<c:if test="${processoIteretor.numero eq param.processo}">
 				<c:set var="processo"  value="${processoIteretor}"/>
+				<c:set var="edit"  value="y"/>
 			</c:if>
 		</c:forEach>
 	</c:if>
@@ -50,6 +51,7 @@
 
 					<form action="${pageContext.request.contextPath}/controller.do" method="POST" class="form-horizontal">
 						<input type="hidden" name="op" value="novproc">
+						<input type="hidden" name="edit" value="${edit}">
 						<div class="row">
 							<div class="col-sm-3 class="form-group">
 								<label for="numero" class="control-label"> *Número do Processo:</label>

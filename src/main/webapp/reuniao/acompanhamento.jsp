@@ -84,12 +84,12 @@
 							</c:forEach>
 						</div>
 					</div>
-					<input type="submit" class="btn btn-primary" value="Encerrar Reuni�o">
+					<input type="submit" class="btn btn-primary" value="Encerrar Reuniao">
 				</div>
 
 				<div class="col-sm-9 " class="form-group">
 					<div class="panel panel-primary">
-						<div class="panel-heading"> Processo em aprecia��o </div>
+						<div class="panel-heading"> Processo em apreciacao </div>
 						<div class="panel-body">
 							<form action="${pageContext.request.contextPath}/controller.do" method="POST" class="form-horizontal">
 								<input type="hidden" name="idProcesso" value="${processo.id}">
@@ -98,7 +98,7 @@
 								
 								<div class="row">								
 									<div class="col-sm-4" class="form-group">
-										<label for="numeroProcesso" class="control-label disabled">N�:</label>
+										<label for="numeroProcesso" class="control-label disabled">Numero:</label>
 										<div>
 											<p id="numeroProcesso" name="numeroProcesso" class="form-control-static">${processo.numero}</p>
 <%-- 											<input type="text" id="numeroProcesso" value="${processo.numero}" --%>
@@ -132,7 +132,7 @@
 										<div class="row">
 
 											<div class="col-sm-8" class="form-group">
-												<label for="decisao">Decis�o:</label> <select
+												<label for="decisao">Decisicao:</label> <select
 													class="form-control" id="decisao" name="decisao">
 													<option value="DEFERIDO" label="DEFERIDO">DEFERIDO</option>
 													<option value="INDEFERIDO" label="INDEFERIDO">INDEFERIDO</option>
@@ -174,26 +174,43 @@
 									<div class="col-sm-12" class="form-group">
 										<table class="table">
 											<tbody>
-												<c:forEach var="membro" items="${utilBean.membros}">
-													<tr name="">
-														<td>
-															<!-- Ver os alunos membros tb -->
-															${membro.professor.nome}
-														</td>
-														<td>
-															<input type="radio" name="voto-${membro.id}" value="COM_RELATOR"/>
-															Com o relator														
-														</td>
-														<td>
-															<input type="radio" name="voto-${membro.id}" value="DIVERGENTE"/>
-															Divergente
-														</td>
-														<td>
-															<input type="radio" name="voto-${membro.id}" value="ausente"/>
-														 	Ausente
-														</td>
-													</tr>
+												<c:set var="votado" value="n"/>
+												<c:forEach var="voto" items="${utilBean.votos}">
+													<c:if test="${param.processo eq voto.processo.numero}">
+														<c:set var="votado" value="s"/>
+														<tr>
+															<td>
+																${voto.membro.professor.nome}
+															</td>
+															<td>
+																${voto.voto}
+															</td>
+														</tr>
+													</c:if>
 												</c:forEach>
+												
+												<c:if test="${votado eq 'n'}">	
+													<c:forEach var="membro" items="${utilBean.membros}">
+														<tr>
+															<td>
+																<!-- Ver os alunos membros tb -->
+																${membro.professor.nome}
+															</td>
+															<td>
+																<input type="radio" name="voto-${membro.id}" value="COM_RELATOR"/>
+																Com o relator														
+															</td>
+															<td>
+																<input type="radio" name="voto-${membro.id}" value="DIVERGENTE"/>
+																Divergente
+															</td>
+															<td>
+																<input type="radio" name="voto-${membro.id}" value="ausente"/>
+															 	Ausente
+															</td>
+														</tr>
+													</c:forEach>
+												</c:if>
 											</tbody>
 										</table>
 									</div>
@@ -201,8 +218,10 @@
 
 								<div class="row">
 									<div class="col-sm-2" class="form-group">
-										<br /> <input type="submit" class="btn btn-primary" name="op"
-											value="Concluir">
+										<br /> 
+										<button class="btn btn-primary" type="submit" name="op" value="Concluir">MUDAR</button>
+<!-- 										<input type="submit" class="btn btn-primary" name="op" -->
+<!-- 											value="Concluir"> -->
 									</div>
 									<div class="col-sm-2" class="form-group">
 										<br /> <input type="submit" class="btn btn-primary"

@@ -14,7 +14,7 @@
 	
 	<div class="container">
 		<div class="main-page" style="margin-top: 70px">
-			<h3><i class="fa fa-edit"></i> Planejamento de reuniões </h3>
+			<h3><i class="fa fa-edit"></i> Reuniões </h3>
 
 			<!-- Mensagens de erro do formulario -->
 <%-- 			<c:if test="${not empty msgsErro}"> --%>
@@ -32,9 +32,7 @@
 <!-- 			Botão nova reuniao (tirar?) -->
 			<div class="row">
 				<div class="col-sm-2" class="form-group">
-					<br /><a href="${pageContext.request.contextPath}/reuniao/cadastrar.jsp">
-					 <button  class="btn btn-primary" > Nova Reunião </button> 
-					 </a> 
+					<br /> <input type="submit" class="btn btn-primary" value="Novo">
 				</div>
 				<div class="col-sm-2 pull-right" class="form-group">
 					<label for="status">Status:</label> <select class="form-control"
@@ -62,7 +60,6 @@
 							<th>Processos</th>
 							<th>Status</th>
 							<th>Operacoes</th>
-							<th>Excluir</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -82,10 +79,16 @@
 										pattern="dd/MM/yyyy" /></td>
 								<td>${reuniao.countProcessos}</td>
 								<td>${reuniao.status}</td>
-								<td><input type="submit" class="btn btn-primary"
-									value="PDF"></td>
-								<td><input type="submit" class="btn btn-primary"
-									value="x"></td>
+								<td>
+									<center>
+																		
+									<button type="submit" value="" class="btn btn-default">
+									<i class="glyphicon glyphicon-file text-defalut"></i> PDF</button>
+									
+									<button type="submit" value="" class="btn btn-danger">
+									<i class="glyphicon glyphicon-remove text-defalut"></i> Excluir</button>
+									</center>
+								</td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -93,7 +96,6 @@
 				</table>
 			</div>
 		</div>
-	</div>
 	
 	<c:set var="endofconversation" value="true" scope="request"/>
 
