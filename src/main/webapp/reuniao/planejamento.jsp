@@ -156,7 +156,7 @@
 										<td>${processo.requisitante.nome}</td>
 										<td>${processo.assunto.descricao}</td>
 										<td>${processo.relator.professor.nome}</td>	
-										<td><input type="submit" class="btn btn-primary" value="Excluir"></td>
+										<td><input type="submit" class="btn btn-danger" value="Excluir"></td>
 									</tr>
 								</c:forEach>
 							</tbody>
