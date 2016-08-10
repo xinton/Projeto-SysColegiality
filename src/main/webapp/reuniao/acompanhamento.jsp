@@ -219,7 +219,7 @@
 								<div class="row">
 									<div class="col-sm-2" class="form-group">
 										<br /> 
-										<button class="btn btn-primary" type="submit" name="op" value="Concluir">MUDAR</button>
+										<button class="btn btn-primary" type="submit" name="op" value="votarProcesso">Concluir</button>
 <!-- 										<input type="submit" class="btn btn-primary" name="op" -->
 <!-- 											value="Concluir"> -->
 									</div>
