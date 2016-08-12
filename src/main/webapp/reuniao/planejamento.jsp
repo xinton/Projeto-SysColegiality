@@ -137,8 +137,8 @@
 							<div class="col-sm-2" class="form-group">
 								
 								<br/>
-									<button name="op" type="submit" value="+" class="btn btn-primary">
-									<i class="glyphicon glyphicon-plus text-default"></i> </button>								
+									<button name="op" type="submit" value="addProcess" class="btn btn-primary">
+									<i class="glyphicon glyphicon-plus text-default"></i></button>								
 <!-- 								<input type="submit" class="btn btn-primary" name="op" value="+"> -->
 							</div>
 						</div>
@@ -180,6 +180,8 @@
 							<div class="col-sm-2" class="form-group">
 								<br /> <button type="submit" value="novreu" class="btn btn-primary" >Salvar
 												</button>
+								<br /> <button class="btn btn-primary" type="submit" name="op" value="novreun">Salvar</button>
+								<!-- <input type="submit" class="btn btn-primary" name="op" value="Salvar">-->
 							</div>
 						</div>
 					</form>
