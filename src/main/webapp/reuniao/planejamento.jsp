@@ -31,9 +31,7 @@
 
 <!-- 			Botão nova reuniao (tirar?) -->
 			<div class="row">
-				<div class="col-sm-2" class="form-group">
-					<br /> <input type="submit" class="btn btn-primary" value="Novo">
-				</div>
+				
 				<div class="col-sm-2 pull-right" class="form-group">
 					<label for="status">Status:</label> <select class="form-control"
 						id="status" name="status">
@@ -66,7 +64,7 @@
 						<c:forEach var="reuniao" items="${utilBean.reunioes}">
 							<tr>
 								<td>${reuniao.id} 
-								<a href="acompanhamento.jsp?reuniao=${reuniao.id}"> <span class="label label-success">  Abrir  </span> </a> 
+								<a href="${pageContext.request.contextPath}/reuniao/acompanhamento.jsp?reuniao=${reuniao.id}"> <span class="label label-success">  Abrir  </span> </a> 
 								</td>
 								
 <%-- 								<a href=" --%>
@@ -180,7 +178,8 @@
 
 						<div class="row">
 							<div class="col-sm-2" class="form-group">
-								<br /> <input type="submit" class="btn btn-primary" name="op" value="Salvar">
+								<br /> <button type="submit" value="novreu" class="btn btn-primary" >Salvar
+												</button>
 							</div>
 						</div>
 					</form>

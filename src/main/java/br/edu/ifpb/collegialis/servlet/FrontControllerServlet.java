@@ -104,8 +104,7 @@ public class FrontControllerServlet extends HttpServlet {
 			request.setAttribute("processos", processos);
 			request.setAttribute("membro", request.getParameter("membro"));
 			
-			RequestDispatcher dispatcher = request.getRequestDispatcher(paginaSucesso);
-			dispatcher.forward(request, response);
+			proxPagina = paginaSucesso;
 			break;
 		// Atualiza um colegiado existente
 		case "atucol":
@@ -140,7 +139,8 @@ public class FrontControllerServlet extends HttpServlet {
 			request.setAttribute("erro", "Operacao nao especificada no servlet!");
 			proxPagina = "../erro/erro.jsp";
 		}
-		
+		RequestDispatcher dispatcher = request.getRequestDispatcher(proxPagina);
+		dispatcher.forward(request, response);
 	}
 	
 }
